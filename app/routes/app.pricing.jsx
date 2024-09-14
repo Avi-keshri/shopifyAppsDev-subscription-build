@@ -21,7 +21,7 @@ import {
   } from '@shopify/polaris-icons'
   
     export async function loader({ request }) {
-      const { billing,session} = await authenticate.admin(request);
+      const { billing } = await authenticate.admin(request);
       
       try {
         // Attempt to check if the shop has an active payment for any plan
@@ -32,6 +32,7 @@ import {
           onFailure: () => {
             throw new Error('No active plan');
           },
+          const
         });
     
         // If the shop has an active subscription, log and return the details
