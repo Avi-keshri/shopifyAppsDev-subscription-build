@@ -31,8 +31,7 @@ import {
           // Instead of redirecting on failure, just catch the error
           onFailure: () => {
             throw new Error('No active plan');
-          },
-          const
+          }
         });
     
         // If the shop has an active subscription, log and return the details
