@@ -13,7 +13,7 @@ export const loader = async ({ request }) => {
       plan: MONTHLY_PLAN,
       isTest: true,
       //returnUrl: `https://admin.shopify.com/store/subscription-build/apps/subscription-build/app/pricing`,
-      returnUrl:`https://admin.shopify.com/store/${myShop}/apps/${process.env.APP_NAME}/app/pricing`
+      returnUrl:`https://admin.shopify.com/store/${myShop}/apps/${process.env.APP_NAME}/app/dashboard`
     }),
   });
   // App logic

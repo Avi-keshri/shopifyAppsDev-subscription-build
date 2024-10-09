@@ -25,7 +25,7 @@
                   .catch(error => console.log('error', error));
           },
           wishlisted: false,
-          appUrl: "https://always-sons-mortgage-notification.trycloudflare.com/",
+          appUrl: "https://finds-lines-sugar-vat.trycloudflare.com/",
             addToWishlist() {
                 // TODO: send data to database save wishlist
                 {%  unless customer  %}
@@ -56,6 +56,7 @@
                 fetch(this.appUrl + "api/wishlist", requestOptions)
                     .then(response => response.json())
                     .then(result => {
+                      console.log(result);
                         if(result.wishlisted){
                           this.wishlisted = true;
                         }else{
@@ -94,6 +95,7 @@
   {
     "name": "Wishlist icon",
     "target": "section",
+    "available_if": "{{ app.metafields.mtappsremixbillingdemo.hasPlan }}",
     "settings": [
       { "type": "product",  "id": "product", "label": "product", "autofill": true  },
       { "type": "text", "id": "text", "label": "Text", "default": "Add to wishlist"  },

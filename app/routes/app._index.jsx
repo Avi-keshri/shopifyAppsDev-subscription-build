@@ -32,9 +32,6 @@ export const loader = async ({ request }) => {
       id: "asc",
     },
   });
-
-  console.log('wishlistData: -------> ', wishlistData);
-
   return json(wishlistData);
 };
 

@@ -19,9 +19,14 @@ import {
   import {
     CheckIcon
   } from '@shopify/polaris-icons'
+
+  import {
+    getSubscriptionStatus,
+    createSubscriptionMetafield,
+  } from "../models/Subscription.server";
   
     export async function loader({ request }) {
-      const { billing } = await authenticate.admin(request);
+      const { admin , billing } = await authenticate.admin(request);
       
       try {
         // Attempt to check if the shop has an active payment for any plan
@@ -33,7 +38,16 @@ import {
             throw new Error('No active plan');
           }
         });
-    
+        const subscriptions = await getSubscriptionStatus(admin.graphql);
+        const { activeSubscriptions } = subscriptions.data.app.installation;
+        if (activeSubscriptions) {
+          if (activeSubscriptions[0].status === "ACTIVE") {
+            await createSubscriptionMetafield(admin.graphql, "true");
+          } else {
+            await createSubscriptionMetafield(admin.graphql, "false");
+          }
+        }
+
         // If the shop has an active subscription, log and return the details
         const subscription = billingCheck.appSubscriptions[0];
         console.log(`Shop is on ${subscription.name} (id ${subscription.id})`);

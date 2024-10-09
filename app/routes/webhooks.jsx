@@ -1,9 +1,10 @@
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
+import { createSubscriptionMetafield } from "../models/Subscription.server";
 
 export const action = async ({ request }) => {
-  const { topic, shop, session, admin } = await authenticate.webhook(request);
-
+  const { topic, shop, session, admin,payload } = await authenticate.webhook(request);
+  
   if (!admin && topic !== "SHOP_REDACT") {
     // The admin context isn't returned if the webhook fired after a shop was uninstalled.
     // The SHOP_REDACT webhook will be fired up to 48 hours after a shop uninstalls the app.
@@ -20,6 +21,13 @@ export const action = async ({ request }) => {
       }
 
       break;
+    case "APP_SUBSCRIPTIONS_UPDATE":
+      if (payload.app_subscription.status == "ACTIVE") {
+        createSubscriptionMetafield(admin.graphql, "true");
+      } else {
+        createSubscriptionMetafield(admin.graphql, "false");
+      }
+      break;  
     case "CUSTOMERS_DATA_REQUEST":
     case "CUSTOMERS_REDACT":
     case "SHOP_REDACT":

@@ -3,7 +3,7 @@
 client_id = "80c5b4412909ccef78262fa539c68aeb"
 name = "subscription-build"
 handle = "subscription-build"
-application_url = "https://always-sons-mortgage-notification.trycloudflare.com"
+application_url = "https://walls-paintings-safari-aluminum.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://always-sons-mortgage-notification.trycloudflare.com/auth/callback",
-  "https://always-sons-mortgage-notification.trycloudflare.com/auth/shopify/callback",
-  "https://always-sons-mortgage-notification.trycloudflare.com/api/auth/callback"
+  "https://walls-paintings-safari-aluminum.trycloudflare.com/auth/callback",
+  "https://walls-paintings-safari-aluminum.trycloudflare.com/auth/shopify/callback",
+  "https://walls-paintings-safari-aluminum.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

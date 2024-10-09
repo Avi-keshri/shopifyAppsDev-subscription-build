@@ -2,6 +2,7 @@ import "@shopify/shopify-app-remix/adapters/node";
 import {
   ApiVersion,
   AppDistribution,
+  DeliveryMethod,
   shopifyApp,
   BillingInterval
 } from "@shopify/shopify-app-remix/server";
@@ -27,11 +28,23 @@ const shopify = shopifyApp({
       amount: 10,
       currencyCode: 'USD',
       interval: BillingInterval.Every30Days,
+      trialDays: 7,
     },
     [ANNUAL_PLAN]: {
       amount: 100,
       currencyCode: 'USD',
       interval: BillingInterval.Annual,
+      trialDays: 7,
+    },
+  },
+  webhooks: {
+    APP_UNINSTALLED: {
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: "/webhooks",
+    },
+    APP_SUBSCRIPTIONS_UPDATE: {
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: "/webhooks",
     },
   },
   future: {
